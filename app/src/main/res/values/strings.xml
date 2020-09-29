@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">ShaadoowApp</string>
+
+    <string name="request_timeout_please_check_your_connection">Request timeout, Please check your connection.</string>
+
+    <string name="retry">Retry</string>
+
+    <string name="connection_is_lost">No connection</string>
+    <string name="waiting_for_connection">Waiting for connection</string>
+    <string name="connection_is_back">Back to connection</string>
+
+    <string name="recommended_for_you">Recommended for you</string>
+    <string name="see_all">See All</string>
+    <string name="post_feed">Post Feed</string>
+    <string name="home">Home</string>
+    <string name="explore">Explore</string>
+    <string name="activity">Activity</string>
+    <string name="profile">Profile</string>
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
+    <string name="share">Share</string>
+    <string name="more">More</string>
+    <string name="start_record">Start Record Action</string>
+
+</resources>

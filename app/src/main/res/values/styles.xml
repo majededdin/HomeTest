@@ -1,0 +1,145 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppBarLayout" parent="Widget.Design.AppBarLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/AppTheme.AppBarOverlay</item>
+        <item name="elevation">1dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fitsSystemWindows">true</item>
+
+    </style>
+
+
+    <style name="Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="buttonGravity">center_vertical</item>
+        <!--        <item name="titleMarginStart">24dp</item>-->
+        <item name="android:popupTheme">@style/AppTheme.PopupOverlay</item>
+        <item name="layout_scrollFlags">scroll|enterAlways</item>
+
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    // --------------------------------- CollapsingToolbar -----------------
+
+    <style name="CollapsingToolBar" parent="Widget.Design.CollapsingToolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="expandedTitleMarginStart">16dp</item>
+        <item name="layout_collapseMode">parallax</item>
+        <item name="layout_scrollFlags">scroll|exitUntilCollapsed</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
+
+    </style>
+
+    // ------------------------------------------- TextView ----------------------------------------
+
+    <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorTextDefault</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textStyle">normal</item>
+
+    </style>
+
+
+    <style name="TextView.Colored" parent="TextView">
+        <item name="android:textColor">@color/colorPrimary</item>
+
+    </style>
+
+
+    <style name="TextView.Paragraph" parent="TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorTextParagraph</item>
+
+    </style>
+
+
+    <style name="TextView.Paragraph.Colored" parent="TextView.Paragraph">
+        <item name="android:textColor">@color/colorTextHeader</item>
+
+    </style>
+
+
+    <style name="TextView.Header" parent="TextView.Paragraph.Colored">
+        <item name="android:textSize">16sp</item>
+
+    </style>
+
+
+    <style name="TextView.Clickable" parent="TextView.Paragraph">
+        <item name="android:padding">8dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+
+    </style>
+
+
+    // ------------------------------------------- FloatingButton
+    -------------------------------------
+
+
+    <style name="FloatingButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="borderWidth">0dp</item>
+        <item name="elevation">6dp</item>
+        <item name="fabSize">normal</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="tint">@android:color/white</item>
+        <item name="android:scaleType">centerInside</item>
+
+    </style>
+
+    // --------------------------------- BottomNav -------------------------
+
+    <style name="BottomNav" parent="Widget.Design.BottomNavigationView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+
+        <!-- To Disable Shifting Mode-->
+        <!--app:labelVisibilityMode="labeled"-->
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemBackground">?android:attr/selectableItemBackground</item>
+        <item name="itemTextAppearanceActive">@style/BottomNav.TextAppearanceActive</item>
+        <item name="itemTextAppearanceInactive">@style/BottomNav.TextAppearanceInactive</item>
+    </style>
+
+    <style name="BottomNav.TextAppearanceInactive" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/tab_indicator_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="BottomNav.TextAppearanceActive" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+</resources>

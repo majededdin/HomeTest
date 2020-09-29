@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_ownerSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+        <am.leon.LeonImageView
+            android:id="@+id/img_owner"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            tools:src="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_ownerName"
+                style="@style/TextView.Colored"
+                tools:text="@string/app_name" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txt_postDate"
+                style="@style/TextView"
+                tools:text="@string/app_name"
+                android:drawablePadding="4dp"
+                android:drawableStart="@drawable/ic_time" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_record"
+            android:padding="8dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_record_background" />
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_postDescription"
+        style="@style/TextView.Paragraph"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        tools:text="@string/app_name" />
+
+    <am.leon.LeonImageView
+        android:id="@+id/img_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        tools:src="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorDisableBackground">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_like"
+            style="@style/TextView.Clickable"
+            android:textColor="@color/colorTextHeader"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/like"
+            android:gravity="center"
+            android:maxLines="1"
+            android:drawableStart="@drawable/ic_like"
+            android:drawablePadding="8dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_comment"
+            style="@style/TextView.Clickable"
+            android:textColor="@color/colorTextHeader"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/comment"
+            android:gravity="center"
+            android:maxLines="1"
+            android:drawableStart="@drawable/ic_comment"
+            android:drawablePadding="8dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_share"
+            style="@style/TextView.Clickable"
+            android:textColor="@color/colorTextHeader"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/share"
+            android:gravity="center"
+            android:drawableStart="@drawable/ic_share"
+            android:drawablePadding="8dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_more"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_more" />
+
+    </LinearLayout>
+
+</LinearLayout>
