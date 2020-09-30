@@ -9,11 +9,10 @@
     <com.google.android.material.appbar.AppBarLayout style="@style/AppBarLayout">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_explore"
+            android:id="@+id/toolbar_index"
             style="@style/Toolbar"
-            app:layout_scrollFlags="snap"
-            app:titleTextColor="@color/colorTextHeader"
-            app:title="Artists" />
+            app:title="Artists"
+            app:navigationIcon="@drawable/ic_arrow_back" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

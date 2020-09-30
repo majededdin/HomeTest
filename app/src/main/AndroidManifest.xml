@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.view.activities.ArtistsIndexActivity"></activity>
+        <activity android:name=".ui.view.activities.ArtistsIndexActivity" />
         <activity android:name=".ui.view.activities.ExploreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import majed.eddin.shaadoowapp.BuildConfig;
 import majed.eddin.shaadoowapp.data.consts.AppConst;
 import okhttp3.Cache;
 import okhttp3.ConnectionPool;
@@ -32,7 +33,7 @@ public class ApiClient {
 
 
     private static Retrofit getClient() {
-        logging.level(HttpLoggingInterceptor.Level.BASIC);
+        logging.level(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BASIC : HttpLoggingInterceptor.Level.NONE);
         if (ourInstance == null)
             ourInstance = new Retrofit.Builder()
                     .baseUrl(AppConst.getInstance().getAppBaseUrl())

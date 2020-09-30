@@ -5,12 +5,12 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/baseAppBarCollapse"
+        android:id="@+id/appBarLayout"
         style="@style/AppBarLayout"
         android:background="@android:color/white">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/base_collapseToolbar"
+            android:id="@+id/collapseToolbar"
             style="@style/CollapsingToolBar"
             app:contentScrim="@android:color/transparent"
             app:layout_scrollFlags="scroll">

@@ -2,6 +2,7 @@ package majed.eddin.shaadoowapp.ui.view.activities;
 
 import android.os.Bundle;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,12 +13,12 @@ import majed.eddin.shaadoowapp.data.remote.ApiResponse;
 import majed.eddin.shaadoowapp.data.remote.ApiStatus;
 import majed.eddin.shaadoowapp.ui.base.BaseActivity;
 import majed.eddin.shaadoowapp.ui.view.adapters.ArtistsAdapter;
-import majed.eddin.shaadoowapp.ui.viewModel.HomeVM;
+import majed.eddin.shaadoowapp.ui.viewModel.ArtistIndexVM;
 import majed.eddin.shaadoowapp.utils.recyclerUtils.OnEndless;
 
-public class ArtistsIndexActivity extends BaseActivity<HomeVM> implements ArtistsAdapter.ArtistCallback {
+public class ArtistsIndexActivity extends BaseActivity<ArtistIndexVM> implements ArtistsAdapter.ArtistCallback {
 
-    private HomeVM homeVM;
+    private ArtistIndexVM artistIndexVM;
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recycler_artists;
@@ -28,13 +29,13 @@ public class ArtistsIndexActivity extends BaseActivity<HomeVM> implements Artist
 
 
     @Override
-    public Class<HomeVM> getBaseViewModel() {
-        return HomeVM.class;
+    public Class<ArtistIndexVM> getBaseViewModel() {
+        return ArtistIndexVM.class;
     }
 
     @Override
-    protected void baseViewModelInstance(HomeVM viewModel) {
-        homeVM = viewModel;
+    protected void baseViewModelInstance(ArtistIndexVM viewModel) {
+        artistIndexVM = viewModel;
     }
 
 
@@ -48,7 +49,7 @@ public class ArtistsIndexActivity extends BaseActivity<HomeVM> implements Artist
 
         updateView();
 
-        homeVM.getArtistsApiResponse().observe(this, this::artistsResult);
+        artistIndexVM.getArtistsApiResponse().observe(this, this::artistsResult);
 
     }
 
@@ -79,19 +80,22 @@ public class ArtistsIndexActivity extends BaseActivity<HomeVM> implements Artist
         recycler_artists.addOnScrollListener(scrollListener);
 
         if (apiResponse.getResponseList().size() == 0)
-            homeVM.getArtists(1);
+            artistIndexVM.getArtists(1, () -> {
+            });
     }
 
     private void getArtists(int page) {
-        homeVM.getArtists(page);
+        artistIndexVM.getArtists(page, () -> {
+        });
     }
 
     @Override
     public void viewInit() {
         swipeRefresh = findViewById(R.id.swipeRefresh);
+        ((Toolbar) findViewById(R.id.toolbar_index)).setNavigationOnClickListener(view -> onBackPressed());
         recycler_artists = getCustomView().findViewById(R.id.recycler_artists);
 
-        artistsAdapter = new ArtistsAdapter(this, this, false);
+        artistsAdapter = new ArtistsAdapter(this, false);
         recycler_artists.setAdapter(artistsAdapter);
         artistsLayoutManager = new GridLayoutManager(this, 2);
         recycler_artists.setLayoutManager(artistsLayoutManager);

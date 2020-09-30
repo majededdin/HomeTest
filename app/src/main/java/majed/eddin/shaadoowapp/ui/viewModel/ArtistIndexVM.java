@@ -6,17 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.functions.Action;
 import majed.eddin.shaadoowapp.data.model.Artist;
-import majed.eddin.shaadoowapp.data.model.Post;
 import majed.eddin.shaadoowapp.data.remote.ApiResponse;
-import majed.eddin.shaadoowapp.data.repositories.HomeRepository;
+import majed.eddin.shaadoowapp.data.repositories.BaseRepository;
 
-public class HomeVM extends BaseViewModel {
+public class ArtistIndexVM extends BaseViewModel {
 
-    private HomeRepository repository;
+    private BaseRepository repository;
 
-    public HomeVM(@NonNull Application application) {
+    public ArtistIndexVM(@NonNull Application application) {
         super(application);
-        repository = new HomeRepository(application);
+        repository = new BaseRepository(application);
     }
 
     @Override
@@ -29,18 +28,9 @@ public class HomeVM extends BaseViewModel {
         return repository.getArtistApiResponse();
     }
 
-    public MutableLiveData<ApiResponse<Post>> getPostsApiResponse() {
-        return repository.getPostsApiResponse();
-    }
-
 
     public void getArtists(int page, Action action) {
         repository.getArtists(page, action);
-    }
-
-
-    public void getPosts(int page) {
-        repository.getPosts(page);
     }
 
 }

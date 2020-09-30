@@ -14,7 +14,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 import majed.eddin.shaadoowapp.R;
 import majed.eddin.shaadoowapp.data.model.Artist;
-import majed.eddin.shaadoowapp.ui.base.BaseActivity;
 import majed.eddin.shaadoowapp.utils.Utils;
 import majed.eddin.shaadoowapp.utils.imageUtils.RoundedImage;
 
@@ -22,12 +21,10 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ViewHold
 
     private boolean fromExplore;
     private List<Artist> items;
-    private BaseActivity<?> context;
     private ArtistCallback callback;
 
 
-    public ArtistsAdapter(BaseActivity<?> context, ArtistCallback callback, boolean fromExplore) {
-        this.context = context;
+    public ArtistsAdapter(ArtistCallback callback, boolean fromExplore) {
         this.fromExplore = fromExplore;
         this.callback = callback;
         this.items = new ArrayList<>();
@@ -37,7 +34,7 @@ public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_artist, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_artist, parent, false);
 
         return new ViewHolder(view);
     }

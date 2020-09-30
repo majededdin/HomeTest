@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.android.material.appbar.AppBarLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,10 +25,11 @@ import majed.eddin.shaadoowapp.ui.view.adapters.PostsAdapter;
 import majed.eddin.shaadoowapp.ui.viewModel.HomeVM;
 import majed.eddin.shaadoowapp.utils.recyclerUtils.OnEndless;
 
-public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickListener, ArtistsAdapter.ArtistCallback, PostsAdapter.PostsCallback {
+public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickListener, ArtistsAdapter.ArtistCallback, PostsAdapter.PostsCallback, AppBarLayout.OnOffsetChangedListener {
 
     private HomeVM homeVM;
 
+    private AppBarLayout appBarLayout;
     private LinearLayout layout_artists, layout_posts;
     private RecyclerView recycler_artists, recycler_posts;
     private RecyclerView.LayoutManager artistsLayoutManager, postsLayoutManager;
@@ -58,7 +61,7 @@ public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickLi
         viewInit();
         showLoading(getViewLifecycleOwner());
 
-        updateView();
+        homeVM.getArtists(1, this::updateView);
 
         homeVM.getArtistsApiResponse().observe(getViewLifecycleOwner(), this::artistsResult);
         homeVM.getPostsApiResponse().observe(getViewLifecycleOwner(), this::postsResult);
@@ -69,7 +72,6 @@ public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickLi
 
     private void artistsResult(ApiResponse<Artist> apiResponse) {
         handleApiResponse(apiResponse, v -> updateView());
-        getSwipeRefresh().setRefreshing(false);
         if (apiResponse.getApiStatus() == ApiStatus.OnSuccess) {
             if (apiResponse.getResponseList().size() > 0) {
                 artistsAdapter.addAll(apiResponse.getResponseList());
@@ -82,6 +84,7 @@ public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickLi
 
     private void postsResult(ApiResponse<Post> apiResponse) {
         handleApiResponse(apiResponse, v -> updateView());
+        getSwipeRefresh().setRefreshing(false);
         if (apiResponse.getApiStatus() == ApiStatus.OnSuccess) {
             this.apiResponse = apiResponse;
             if (apiResponse.getResponseList().size() > 0) {
@@ -97,9 +100,6 @@ public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickLi
     public void updateView() {
         apiResponse.getResponseList().clear();
         postsAdapter.clear();
-        artistsAdapter.clear();
-
-        homeVM.getArtists(1);
 
         OnEndless scrollListener = new OnEndless((LinearLayoutManager) postsLayoutManager, 1) {
             @Override
@@ -122,14 +122,17 @@ public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickLi
 
     @Override
     public void viewInit() {
+        appBarLayout = getCustomView().findViewById(R.id.appBarLayout);
         layout_artists = getCustomView().findViewById(R.id.layout_artists);
         layout_posts = getCustomView().findViewById(R.id.layout_posts);
         recycler_artists = getCustomView().findViewById(R.id.recycler_artists);
         recycler_posts = getCustomView().findViewById(R.id.recycler_posts);
 
+        appBarLayout.addOnOffsetChangedListener(this);
+
         getCustomView().findViewById(R.id.txt_seeAll).setOnClickListener(this);
 
-        artistsAdapter = new ArtistsAdapter(getBaseActivity(), this, true);
+        artistsAdapter = new ArtistsAdapter(this, true);
         recycler_artists.setAdapter(artistsAdapter);
         artistsLayoutManager = new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.HORIZONTAL, false);
         recycler_artists.setLayoutManager(artistsLayoutManager);
@@ -180,7 +183,17 @@ public class HomeFragment extends BaseFragment<HomeVM> implements View.OnClickLi
     }
 
     @Override
+    public void onActionClicked(Post post) {
+        showMessage(getBaseActivity().getString(R.string.action));
+    }
+
+    @Override
     public void onRecordClicked(Post post) {
         showMessage(getBaseActivity().getString(R.string.start_record));
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        setOnSwipeRefreshStatus(verticalOffset == 0);
     }
 }

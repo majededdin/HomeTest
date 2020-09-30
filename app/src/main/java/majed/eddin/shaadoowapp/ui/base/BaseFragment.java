@@ -107,6 +107,13 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
         return swipeRefreshLayout;
     }
 
+    protected void setOnSwipeRefreshStatus(boolean status) {
+        if (status)
+            swipeRefreshLayout.setEnabled(true);
+        else
+            swipeRefreshLayout.setEnabled(false);
+    }
+
 
     public View getCustomView() {
         return layout;

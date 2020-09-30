@@ -2,6 +2,7 @@ package majed.eddin.shaadoowapp.ui.view.adapters;
 
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -92,7 +93,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
         private PopupMenu popupMenu;
         private LeonImageView img_owner;
@@ -117,6 +118,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             itemView.findViewById(R.id.layout_ownerSection).setOnClickListener(this);
             itemView.findViewById(R.id.btn_more).setOnClickListener(this);
             itemView.findViewById(R.id.btn_record).setOnClickListener(this);
+
+            popupMenu = new PopupMenu(context, itemView.findViewById(R.id.btn_more));
+            popupMenu.getMenuInflater().inflate(R.menu.more_menu, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(this);
         }
 
         @Override
@@ -136,12 +141,27 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                     callback.onShareClicked(post);
                     break;
                 case R.id.btn_more:
-                    callback.onMoreClicked(post);
+                    popupMenu.show();
                     break;
                 case R.id.btn_record:
                     callback.onRecordClicked(post);
                     break;
             }
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            Post post = items.get(getAdapterPosition());
+            switch (item.getItemId()) {
+                case R.id.nav_more:
+                    callback.onMoreClicked(post);
+                    return true;
+
+                case R.id.nav_action:
+                    callback.onActionClicked(post);
+                    return true;
+            }
+            return false;
         }
     }
 
@@ -156,6 +176,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         void onShareClicked(Post post);
 
         void onMoreClicked(Post post);
+
+        void onActionClicked(Post post);
 
         void onRecordClicked(Post post);
     }
